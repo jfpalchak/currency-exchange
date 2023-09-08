@@ -11,6 +11,8 @@ import ExchangeService from './exchange-service.js';
 
 // BUSINESS LOGIC
 
+// call ExchangeService API Pair Conversion endpoint, display conversion data in DOM
+// otherwise, display error for bad get
 export function getConversionRate(usd, query) {
 
   ExchangeService.getConversionRate(usd, query)
@@ -25,6 +27,8 @@ export function getConversionRate(usd, query) {
   console.log('GET CONVERSION');  // !!!!!!
 }
 
+// call ExchangeService API Supported Codes endpoint, and add data to session storage
+// otherwise, display error for bad get
 export function getSupportedCodes() {
   
   ExchangeService.getSupportedCodes()
@@ -39,7 +43,7 @@ export function getSupportedCodes() {
   console.log('GET CODES'); // !!!!!!
 }
 
-// for each currency, add it's code and corresponding country name to session storage
+// For each currency, add code and corresponding country name to session storage
 export function addToSessionStorage(currencies) {
 
   sessionStorage.clear(); // clear storage, just in case
@@ -53,8 +57,9 @@ export function addToSessionStorage(currencies) {
 
 // UI LOGIC
 
-// create dropdown selection for all available currencies
-// if session storage is empty, call ExchangeService API to GET supported currency codes and add to session storage
+// Create dropdown selection for all available currencies, found in session storage.
+// If session storage is empty:
+// call ExchangeService API to GET supported currency codes and add to session storage.
 function createSelectionForm() {
   if (!sessionStorage.length) {
     getSupportedCodes();
@@ -62,16 +67,28 @@ function createSelectionForm() {
 
   const selectForm = document.querySelector('select#target-currency');
   const optionGroup = document.createElement('optgroup');
+  const optionGroup2 = document.createElement('optgroup');
   optionGroup.label = "Supported Currency";
 
   Object.keys(sessionStorage).sort().forEach((code) => {
     let option = document.createElement('option');
     option.value = code;
     option.innerText = sessionStorage.getItem(code);
+    if (code === "USD") {
+      option.selected = true;
+    }
     optionGroup.append(option);
   });
   
-  selectForm.append(optionGroup);
+  // !!!! FIXME: 
+  // ? Add option group to utilize error handling.
+  optionGroup2.label = "Unsupported Currency";
+  let opt = document.createElement('option');
+  opt.value = 'KPW';
+  opt.innerText = 'North Korean Won';
+  optionGroup2.append(opt);
+
+  selectForm.append(optionGroup, optionGroup2);
 }
 
 // display conversion data in DOM for user specified currency query

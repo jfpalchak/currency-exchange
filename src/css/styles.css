@@ -5,7 +5,6 @@ body {
   color: #FFFFFF;
 }
 
-
 /* CONVERTER STYLES */
 legend {
   text-align: center;
@@ -18,6 +17,8 @@ legend {
   text-align: center;
   display: flex;
   margin-top: 20%;
+  box-shadow: 0 0 15px 10px rgba(0,0,0,0.06);
+
 }
 
 .user-input {
@@ -29,17 +30,16 @@ select {
   border-radius: 10px;
   border: solid rgb(198, 195, 195);
   color: #FFFFFF;
+  margin: auto 5px;
   width: 170px;
   height: 30px;
 }
-
 
 input {
   width: 170px;
   background-color: #424242;
   border-radius: 10px;
   border: solid rgb(198, 195, 195);
-
   color: #FFFFFF;
 }
 
@@ -47,4 +47,12 @@ label {
   display: inline-block;
   width: 150px;
   text-align: right;
+}
+
+#target-amount {
+  font-weight: bold;
+}
+
+#results {
+  margin-top: 40px;
 }

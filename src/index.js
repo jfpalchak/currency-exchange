@@ -3,7 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import ExchangeService from './exchange-service.js';
 
-
+// TODO : Add cleaResults function
+// TODO : Display more data
+// TODO : Implement currency choice for UI
+// TODO : Clean up Error handling
+// TODO : Separate backend logic
 
 // BUSINESS LOGIC
 
@@ -13,8 +17,6 @@ export function getConversionRate(usd, query) {
     .then((conversion) => {
       if (conversion.result === "success") {
         displayConversion(conversion);
-        // console.log("Success!");
-        // console.log(conversion);
       } else {
         displayError(conversion, query);
       }

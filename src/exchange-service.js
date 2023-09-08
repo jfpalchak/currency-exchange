@@ -25,4 +25,24 @@ export default class ExchangeService {
       });
 
   }
+
+  // static method to call ExchangeRate API's supported codes endpoint
+  static getSupportedCodes() { 
+    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`;
+
+    return fetch(url)
+      .then(function(response) {
+        if (!response.ok) {
+          return response.json()
+            .then(function(apiResponse) {
+              const errorMessage = `${response.status}: ${apiResponse["error-type"]}`;
+              throw new Error(errorMessage);
+            });
+        }
+        return response.json();
+      })
+      .catch(function(error) {
+        return error;
+      });
+  }
 }

@@ -19,7 +19,7 @@ export function getConversionRate(baseAmount, baseCode, queryCode) {
       if (conversion.result === "success") {
         displayConversion(conversion);
       } else {
-        displayError(conversion, queryCode);
+        displayError(conversion, baseCode, queryCode);
       }
     });
 
@@ -112,8 +112,8 @@ function displayConversion(response) {
 }
 
 // display error messages in DOM for user specified currency query
-function displayError(error, query) {
-  const errorHead = `There was an issue getting the conversion rate for "${query}":`;
+function displayError(error, base, query) {
+  const errorHead = `There was an issue getting the conversion rate for "${base}" to "${query}":`;
   document.querySelector("p#error-head").innerText = errorHead;
   document.querySelector("p#error-body").innerText = `${error}`;
 }
@@ -139,8 +139,6 @@ function handleEverything() {
   // handle form submission
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
-    
-    clearResults();
 
     const baseCurrency = document.querySelector("select#base-code").value;
     const baseAmount = document.querySelector("input#usd-amount").value;
@@ -149,6 +147,8 @@ function handleEverything() {
     if (!baseAmount || baseAmount < 0) {
       return null;
     }
+
+    clearResults();
 
     getConversionRate(baseAmount, baseCurrency, targetCurrency);
 

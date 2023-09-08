@@ -3,11 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import ExchangeService from './exchange-service.js';
 
-// TODO : Add cleaResults function
 // TODO : Display more data
 // TODO : Implement currency choice for UI
 // TODO : Clean up Error handling
 // TODO : Separate backend logic
+// TODO+ : Implement cache of API results (if currency is called, save conversion rate)
+// TODO+ : Implement multiple conversions.
+// TODO+ : Implement dropdown selection for currencies.
 
 // BUSINESS LOGIC
 
@@ -38,6 +40,12 @@ function displayError(error, query) {
   document.querySelector("p#error-body").innerText = `${error.message}`;
 }
 
+function clearResults() {
+  document.querySelector("p#error-head").innerText = null;
+  document.querySelector("p#error-body").innerText = null;
+  document.querySelector("p#query-result").innerText = null;
+}
+
 // handle all UI Logic
 function handleEverything() {
 
@@ -45,6 +53,8 @@ function handleEverything() {
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
     
+    clearResults();
+
     const usdAmount = document.querySelector("input#usd-amount").value;
     const targetCurrency = document.querySelector("input#target-currency").value;
 

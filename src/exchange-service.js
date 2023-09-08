@@ -1,6 +1,6 @@
-
 export default class ExchangeService {
-
+  
+  // static method to call ExchangeRate API's Pair Conversion endpoint
   static getConversionRate(baseAmount, baseCode, targetCode) {
 
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${baseCode}/${targetCode}/${baseAmount}`;
@@ -26,8 +26,9 @@ export default class ExchangeService {
 
   }
 
-  // static method to call ExchangeRate API's supported codes endpoint
+  // static method to call ExchangeRate API's Supported Codes endpoint
   static getSupportedCodes() { 
+
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`;
 
     return fetch(url)

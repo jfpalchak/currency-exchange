@@ -13,15 +13,21 @@
 
   <div class="form container">
     <form>
-      <label for="usd-amount">Enter amount of USD:</label>
-      <input id="usd-amount" type="number" name="usd-amount">
-      <br />
-      <label for="target-currency">Enter target currency:</label>
-      <input type="text" list="target-currency" id="target-code">
-      <datalist name="target-currency" id="target-currency">
-      </datalist>
-      <br />
-      <button type="submit" class="btn btn-success" id="submit-usd">Exchange!</button>
+      <div class="base container">
+        <label for="usd-amount">Base:</label>
+        <input id="usd-amount" type="number" name="usd-amount">
+        <select name="base-code" id="base-code">
+        </select>
+      </div>
+      <div class="target container">
+        <label for="target-code">Target:</label>
+        <input id="target-amount" type="text" name="target-amount">
+        <select name="target-code" id="target-code">
+        </select>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-success" id="submit-usd">Exchange</button>
+      </div>
     </form>
   </div>
 

@@ -1,3 +1,4 @@
+
 export default class ExchangeService {
 
   static getConversionRate(usdAmount, targetCurrency) {
@@ -8,9 +9,12 @@ export default class ExchangeService {
       .then(function(response) {
         if (!response.ok) {
           return response.json()
-            // if response is not OK, grab the API's custom error message
             .then(function(apiResponse) {
-              const errorMessage = `${response.status} ${response.statusText}: ${apiResponse["error-type"]}`;
+              let apiError = apiResponse["error-type"];
+              if (response.status === 404){
+                apiError = "Currency not found.";
+              }
+              const errorMessage = `${response.status}: ${apiError}`;
               throw new Error(errorMessage);
             });
         }

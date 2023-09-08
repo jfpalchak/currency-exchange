@@ -29,11 +29,12 @@ $ git clone [REPO-LINK]
 ```
 
 5. To get your own key for the project's API, visit the API's [website](#link).
-6. Create a new account through the website, and **follow these steps**.
-7. Copy the provided API key.
-8. Navigate to the root of the newly cloned directory.
-9. In the project's root directory, create an `.env` file.
-10. In the `.env` file, create the following variable at the top line:
+6. On the site's front page, you can create an account by entering your email and clicking 'Get Free Key'.
+7. You'll then be prompted to create a password for your account and click 'Get Started!', before being presented with your API Key.
+8. Copy the provided API key.
+9. Navigate to the root of the newly cloned directory.
+10. In the project's root directory, create an `.env` file.
+11. In the `.env` file, create the following variable at the top line:
 
 ```javascript
 API_KEY=[YOUR-API-KEY-HERE]

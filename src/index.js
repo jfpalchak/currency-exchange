@@ -7,20 +7,30 @@ import ExchangeService from './exchange-service.js';
 
 // BUSINESS LOGIC
 
-export function getConversionRate(usd, target) {
+export function getConversionRate(usd, query) {
 
-  ExchangeService.getConversionRate(usd, target)
+  ExchangeService.getConversionRate(usd, query)
     .then((conversion) => {
       if (conversion.result === "success") {
-        displayConversion(conversion);
+        // displayConversion(conversion);
+        console.log("Success!");
+        console.log(conversion);
       } else {
-        displayError(conversion);
+        displayError(conversion, query);
+        // console.log("Error!");
+        // console.log(conversion);
       }
     });
 
 }
 
 // UI LOGIC
+
+function displayError(error, query) {
+  const errorHead = `There was an issue getting the conversion rate for "${query}":`;
+  document.querySelector("p#error-head").innerText = errorHead;
+  document.querySelector("p#error-body").innerText = `${error.message}`;
+}
 
 // handle all UI Logic
 function handleEverything() {

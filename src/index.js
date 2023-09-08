@@ -53,14 +53,14 @@ export function addToSessionStorage(currencies) {
 function createSelectionForms() {
   const selectBase = document.querySelector('select#base-code');
   const selectTarget = document.querySelector('select#target-code');
-  selectBase.append(createCurrencyOptions());
-  selectTarget.append(createCurrencyOptions());
+  selectBase.append(createCurrencyOptions("USD"));
+  selectTarget.append(createCurrencyOptions("EUR"));
 }
 
 // Create select option elements for all available currencies, found in session storage.
 // If session storage is empty:
 // call ExchangeService API to GET supported currency codes and add to session storage.
-function createCurrencyOptions() {
+function createCurrencyOptions(setDefault) {
   if (!sessionStorage.length) {
     getSupportedCodes();
   }
@@ -74,14 +74,15 @@ function createCurrencyOptions() {
     option.innerText = sessionStorage.getItem(code);
 
     // Set default selection to USD
-    if (code === "USD") {
+    if (code === setDefault) {
       option.selected = true;
     }
 
     optionGroup.append(option);
   });
 
-  // Add unsupported currency to utilize error handling
+  // ! Add unsupported currency to utilize error handling
+  // ! solely for the purpose of project grading
   let kpwOpt = document.createElement('option');
   kpwOpt.value = "KPW";
   kpwOpt.innerText = "North Korean Won";

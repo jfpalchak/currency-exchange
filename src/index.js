@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import ExchangeService from './exchange-service.js';
 
-// TODO : Display more data
-// TODO : remove console.logs
 // TODO : Separate backend logic
 // TODO+ : Implement cache of API results (if currency is called, save conversion rate)
 
@@ -22,8 +20,6 @@ export function getConversionRate(baseAmount, baseCode, queryCode) {
         displayError(conversion, baseCode, queryCode);
       }
     });
-
-  console.log('GET CONVERSION');  // !!!!!!
 }
 
 // call ExchangeService API Supported Codes endpoint, and add data to session storage
@@ -38,8 +34,6 @@ export function getSupportedCodes() {
         displayError(currencies, "Supported Currencies");
       }
     });
-
-  console.log('GET CODES'); // !!!!!!
 }
 
 // For each currency, add code and corresponding country name to session storage
@@ -50,8 +44,6 @@ export function addToSessionStorage(currencies) {
   currencies.forEach((currency) => {
     sessionStorage.setItem(currency[0], currency[1]);
   });
-
-  console.log("Added to storage."); // !!!!!!!!
 }
 
 // UI LOGIC

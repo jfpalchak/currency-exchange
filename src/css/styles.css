@@ -1,33 +1,46 @@
 
+/* GENERAL STYLES */
+body {
+  background-color: #303030;
+  color: #FFFFFF;
+}
+
+
+/* CONVERTER STYLES */
 legend {
   text-align: center;
 }
+
 .converter {
-  border: solid black 1px;
+  background-color: #424242;
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   display: flex;
   margin-top: 20%;
-  margin-left: 10%;
 }
-
 
 .user-input {
-  margin: 5px;
-}
-
-#button {
-
+  margin: 8px;
 }
 
 select {
+  background-color: #424242;
+  border-radius: 10px;
+  border: solid rgb(198, 195, 195);
+  color: #FFFFFF;
   width: 170px;
   height: 30px;
 }
 
+
 input {
   width: 170px;
+  background-color: #424242;
+  border-radius: 10px;
+  border: solid rgb(198, 195, 195);
+
+  color: #FFFFFF;
 }
 
 label {

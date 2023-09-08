@@ -1,4 +1,4 @@
-# _{Application Name}_
+# _Currency Exchanger_
 
 #### By _**Joey Palchak**_
 
@@ -80,4 +80,4 @@ $ npm run start
 
 MIT License
 
-Copyright (c) _date_ _Joey Palchak_
+Copyright (c) _9/08/2023_ _Joey Palchak_

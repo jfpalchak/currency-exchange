@@ -4,10 +4,9 @@ import './css/styles.css';
 import ExchangeService from './exchange-service.js';
 
 // TODO : Display more data
-// TODO : Clean up Error handling
+// TODO : remove console.logs
 // TODO : Separate backend logic
 // TODO+ : Implement cache of API results (if currency is called, save conversion rate)
-// TODO+ : Implement multiple conversions.
 
 // BUSINESS LOGIC
 
@@ -60,7 +59,7 @@ export function addToSessionStorage(currencies) {
 // Create dropdown selection for all available currencies, 
 // both for Base Currency (default USD), and Target Currency (default USD)
 function createSelectionForms() {
-  const selectBase = document.querySelector('select#base-code')
+  const selectBase = document.querySelector('select#base-code');
   const selectTarget = document.querySelector('select#target-code');
   selectBase.append(createCurrencyOptions());
   selectTarget.append(createCurrencyOptions());
@@ -90,13 +89,26 @@ function createCurrencyOptions() {
     optionGroup.append(option);
   });
 
+  // Add unsupported currency to utilize error handling
+  let kpwOpt = document.createElement('option');
+  kpwOpt.value = "KPW";
+  kpwOpt.innerText = "North Korean Won";
+
+  optionGroup.append(kpwOpt);
+
   return optionGroup;
 }
 
 // display conversion data in DOM for user specified currency query
 function displayConversion(response) {
-  document.querySelector("p#query-result").innerText = `$${response["conversion_result"]}`;
   document.getElementById('target-amount').value = response["conversion_result"];
+
+  const base = sessionStorage.getItem(response["base_code"]);
+  const target = sessionStorage.getItem(response["target_code"]);
+  const rate = response["conversion_rate"];
+  const message = `1 ${base} equals: <h4>${rate} ${target}</h4>`;
+  document.querySelector("p#query-result").innerHTML = message;
+
 }
 
 // display error messages in DOM for user specified currency query

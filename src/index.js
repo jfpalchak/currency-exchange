@@ -65,30 +65,21 @@ function createSelectionForm() {
     getSupportedCodes();
   }
 
-  const selectForm = document.querySelector('select#target-currency');
+  const selectForm = document.querySelector('datalist#target-currency');
   const optionGroup = document.createElement('optgroup');
-  const optionGroup2 = document.createElement('optgroup');
   optionGroup.label = "Supported Currency";
 
   Object.keys(sessionStorage).sort().forEach((code) => {
     let option = document.createElement('option');
     option.value = code;
     option.innerText = sessionStorage.getItem(code);
-    if (code === "USD") {
-      option.selected = true;
-    }
+    // if (code === "USD") {
+    //   option.selected = true;
+    // }
     optionGroup.append(option);
   });
-  
-  // !!!! FIXME: 
-  // ? Add option group to utilize error handling.
-  optionGroup2.label = "Unsupported Currency";
-  let opt = document.createElement('option');
-  opt.value = 'KPW';
-  opt.innerText = 'North Korean Won';
-  optionGroup2.append(opt);
 
-  selectForm.append(optionGroup, optionGroup2);
+  selectForm.append(optionGroup);
 }
 
 // display conversion data in DOM for user specified currency query
@@ -100,7 +91,7 @@ function displayConversion(response) {
 function displayError(error, query) {
   const errorHead = `There was an issue getting the conversion rate for "${query}":`;
   document.querySelector("p#error-head").innerText = errorHead;
-  document.querySelector("p#error-body").innerText = `${error.message}`;
+  document.querySelector("p#error-body").innerText = `${error}`;
 }
 
 // clear displayed results
@@ -123,8 +114,13 @@ function handleEverything() {
     clearResults();
 
     const usdAmount = document.querySelector("input#usd-amount").value;
-    // const targetCurrency = document.querySelector("input#target-currency").value;
-    const targetCurrency = document.querySelector("select#target-currency").value;
+    // ! const targetCurrency = document.querySelector("input#target-currency").value;
+    const targetCurrency = document.querySelector("#target-code").value;
+
+    if (!usdAmount || usdAmount < 0 || !targetCurrency) {
+      return null;
+    }
+
     getConversionRate(usdAmount, targetCurrency);
 
   });

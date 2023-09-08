@@ -12,13 +12,11 @@ export function getConversionRate(usd, query) {
   ExchangeService.getConversionRate(usd, query)
     .then((conversion) => {
       if (conversion.result === "success") {
-        // displayConversion(conversion);
-        console.log("Success!");
-        console.log(conversion);
+        displayConversion(conversion);
+        // console.log("Success!");
+        // console.log(conversion);
       } else {
         displayError(conversion, query);
-        // console.log("Error!");
-        // console.log(conversion);
       }
     });
 
@@ -26,6 +24,12 @@ export function getConversionRate(usd, query) {
 
 // UI LOGIC
 
+// display conversion data in DOM for user specified currency query
+function displayConversion(response) {
+  document.querySelector("p#query-result").innerText = response["conversion_result"];
+}
+
+// display error messages in DOM for user specified currency query
 function displayError(error, query) {
   const errorHead = `There was an issue getting the conversion rate for "${query}":`;
   document.querySelector("p#error-head").innerText = errorHead;

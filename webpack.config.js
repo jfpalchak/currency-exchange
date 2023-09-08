@@ -20,7 +20,7 @@ module.exports = {
       verbose: true
     }),
     new HtmlWebpackPlugin({
-      title: 'Template',
+      title: 'Currency Exchange',
       template: './src/index.html',
       inject: 'body'
     }),

@@ -1,0 +1,37 @@
+
+legend {
+  text-align: center;
+}
+.converter {
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  margin-top: 20%;
+  margin-left: 10%;
+}
+
+
+.user-input {
+  margin: 5px;
+}
+
+#button {
+
+}
+
+select {
+  width: 170px;
+  height: 30px;
+}
+
+input {
+  width: 170px;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}

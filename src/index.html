@@ -7,27 +7,26 @@
 </head>
 <body>
 
-  <div class="header container">
-    <h1>Currency Exchange</h1>
-  </div>
-
-  <div class="form container">
+  <div class="converter container">
     <form>
-      <div class="base container">
-        <label for="usd-amount">Base:</label>
-        <input id="usd-amount" type="number" name="usd-amount">
-        <select name="base-code" id="base-code">
-        </select>
-      </div>
-      <div class="target container">
-        <label for="target-code">Target:</label>
-        <input id="target-amount" type="text" name="target-amount">
-        <select name="target-code" id="target-code">
-        </select>
-      </div>
-      <div>
-        <button type="submit" class="btn btn-success" id="submit-usd">Exchange</button>
-      </div>
+      <fieldset>
+        <legend>Currency Exchange</legend>
+        <div id="base" class="user-input container row">
+          <label for="usd-amount" class="col">Base:</label>
+          <input id="usd-amount" type="number" name="usd-amount" class="col">
+          <select name="base-code" id="base-code" class="col">
+          </select>
+        </div>
+        <div id="target" class="user-input container row">
+          <label for="target-code" class="col">Target:</label>
+          <input id="target-amount" type="text" name="target-amount" class="col">
+          <select name="target-code" id="target-code" class="col">
+          </select>
+        </div>
+        <div id="button" class="user-input button">
+          <button type="submit" class="col-3 btn btn-success" id="submit-usd">Exchange</button>
+        </div>
+      </fieldset>
     </form>
   </div>
 

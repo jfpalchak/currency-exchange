@@ -17,8 +17,9 @@
       <input id="usd-amount" type="number" name="usd-amount">
       <br />
       <label for="target-currency">Enter target currency:</label>
-      <select name="target-currency" id="target-currency">
-      </select>
+      <input type="text" list="target-currency" id="target-code">
+      <datalist name="target-currency" id="target-currency">
+      </datalist>
       <br />
       <button type="submit" class="btn btn-success" id="submit-usd">Exchange!</button>
     </form>

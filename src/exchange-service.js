@@ -1,9 +1,9 @@
 
 export default class ExchangeService {
 
-  static getConversionRate(usdAmount, targetCurrency) {
+  static getConversionRate(baseAmount, baseCode, targetCode) {
 
-    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/USD/${targetCurrency}/${usdAmount}`;
+    const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/pair/${baseCode}/${targetCode}/${baseAmount}`;
 
     return fetch(url)
       .then(function(response) {

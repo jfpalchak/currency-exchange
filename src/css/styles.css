@@ -5,9 +5,15 @@ body {
   color: #FFFFFF;
 }
 
-/* CONVERTER STYLES */
+/* CURRENCY EXCHANGER STYLES */
 legend {
-  text-align: center;
+  margin: auto 15%;
+}
+
+img {
+  float: left;
+  margin-top: 50px;
+  margin-left: 50px;
 }
 
 .converter {
@@ -18,7 +24,6 @@ legend {
   display: flex;
   margin-top: 20%;
   box-shadow: 0 0 15px 10px rgba(0,0,0,0.06);
-
 }
 
 .user-input {
@@ -54,5 +59,13 @@ label {
 }
 
 #results {
-  margin-top: 30px;
+  margin-top: 20px;
+}
+
+/* RESPONSIVE DESIGN */
+@media screen and (max-width: 770px) {
+  img {
+    display: none;
+  }
+
 }

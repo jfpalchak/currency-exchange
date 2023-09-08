@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import ExchangeService from './exchange-service.js';
 
-// TODO : Separate backend logic
+// TODO : Separate backend logic!
 // TODO+ : Implement cache of API results (if currency is called, save conversion rate)
 
 // BUSINESS LOGIC

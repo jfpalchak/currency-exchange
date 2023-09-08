@@ -13,14 +13,14 @@ import ExchangeService from './exchange-service.js';
 
 // call ExchangeService API Pair Conversion endpoint, display conversion data in DOM
 // otherwise, display error for bad get
-export function getConversionRate(usd, query) {
+export function getConversionRate(baseAmount, baseCode, queryCode) {
 
-  ExchangeService.getConversionRate(usd, query)
+  ExchangeService.getConversionRate(baseAmount, baseCode, queryCode)
     .then((conversion) => {
       if (conversion.result === "success") {
         displayConversion(conversion);
       } else {
-        displayError(conversion, query);
+        displayError(conversion, queryCode);
       }
     });
 
@@ -57,15 +57,23 @@ export function addToSessionStorage(currencies) {
 
 // UI LOGIC
 
-// Create dropdown selection for all available currencies, found in session storage.
+// Create dropdown selection for all available currencies, 
+// both for Base Currency (default USD), and Target Currency (default USD)
+function createSelectionForms() {
+  const selectBase = document.querySelector('select#base-code')
+  const selectTarget = document.querySelector('select#target-code');
+  selectBase.append(createCurrencyOptions());
+  selectTarget.append(createCurrencyOptions());
+}
+
+// Create select option elements for all available currencies, found in session storage.
 // If session storage is empty:
 // call ExchangeService API to GET supported currency codes and add to session storage.
-function createSelectionForm() {
+function createCurrencyOptions() {
   if (!sessionStorage.length) {
     getSupportedCodes();
   }
 
-  const selectForm = document.querySelector('datalist#target-currency');
   const optionGroup = document.createElement('optgroup');
   optionGroup.label = "Supported Currency";
 
@@ -73,18 +81,22 @@ function createSelectionForm() {
     let option = document.createElement('option');
     option.value = code;
     option.innerText = sessionStorage.getItem(code);
-    // if (code === "USD") {
-    //   option.selected = true;
-    // }
+
+    // Set default selection to USD
+    if (code === "USD") {
+      option.selected = true;
+    }
+
     optionGroup.append(option);
   });
 
-  selectForm.append(optionGroup);
+  return optionGroup;
 }
 
 // display conversion data in DOM for user specified currency query
 function displayConversion(response) {
-  document.querySelector("p#query-result").innerText = response["conversion_result"];
+  document.querySelector("p#query-result").innerText = `$${response["conversion_result"]}`;
+  document.getElementById('target-amount').value = response["conversion_result"];
 }
 
 // display error messages in DOM for user specified currency query
@@ -99,13 +111,18 @@ function clearResults() {
   document.querySelector("p#error-head").innerText = null;
   document.querySelector("p#error-body").innerText = null;
   document.querySelector("p#query-result").innerText = null;
+
+
+  // document.querySelector("input#usd-amount").value = null;
+  document.querySelector('input#target-amount').value = null;
+
 }
 
 // handle all UI Logic
 function handleEverything() {
 
   // create dropdown selection for all available currencies
-  createSelectionForm();
+  createSelectionForms();
   
   // handle form submission
   document.querySelector("form").addEventListener("submit", (e) => {
@@ -113,15 +130,15 @@ function handleEverything() {
     
     clearResults();
 
-    const usdAmount = document.querySelector("input#usd-amount").value;
-    // ! const targetCurrency = document.querySelector("input#target-currency").value;
-    const targetCurrency = document.querySelector("#target-code").value;
+    const baseCurrency = document.querySelector("select#base-code").value;
+    const baseAmount = document.querySelector("input#usd-amount").value;
+    const targetCurrency = document.querySelector("select#target-code").value;
 
-    if (!usdAmount || usdAmount < 0 || !targetCurrency) {
+    if (!baseAmount || baseAmount < 0) {
       return null;
     }
 
-    getConversionRate(usdAmount, targetCurrency);
+    getConversionRate(baseAmount, baseCurrency, targetCurrency);
 
   });
 

@@ -58,6 +58,7 @@ function createSelectionForms() {
 }
 
 // Create select option elements for all available currencies, found in session storage.
+// Takes a parameter which specifies which currency to set as default option.
 // If session storage is empty:
 // call ExchangeService API to GET supported currency codes and add to session storage.
 function createCurrencyOptions(setDefault) {
@@ -73,7 +74,7 @@ function createCurrencyOptions(setDefault) {
     option.value = code;
     option.innerText = sessionStorage.getItem(code);
 
-    // Set default selection to USD
+    // Set default select option
     if (code === setDefault) {
       option.selected = true;
     }

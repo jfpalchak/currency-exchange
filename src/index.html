@@ -14,14 +14,14 @@
       <fieldset>
         <legend>Currency Exchanger</legend>
         <div id="base" class="user-input container row">
-          <label for="usd-amount" class="col">Base Currency:</label>
-          <input id="usd-amount" type="number" name="usd-amount" class="col" placeholder="Enter an amount here.">
+          <label for="base-amount" class="col">Base Currency:</label>
+          <input id="base-amount" type="number" name="base-amount" class="col" placeholder="Enter amount here.">
           <select name="base-code" id="base-code" class="col">
           </select>
         </div>
         <div id="target" class="user-input container row">
           <label for="target-code" class="col">Exchange Result:</label>
-          <input id="target-amount" type="text" name="target-amount" class="col" placeholder="Result will show here.">
+          <input id="target-amount" type="text" name="target-amount" class="col" placeholder="Result shows here.">
           <select name="target-code" id="target-code" class="col">
           </select>
         </div>
@@ -32,7 +32,7 @@
     </form>
 
     <div id="results" class="col container phone-stack">
-      <p id="query-result">Enter an amount of base currency you'd like to exchange. Then, select from either dropdown menu a desired currency you'd like to convert the base amount to.</p>
+      <p id="query-result">Enter an amount of base currency you'd like to exchange. Then, select from either dropdown menu a currency you'd like to convert the base amount to.</p>
       <p id="error-head"></p>
       <p id="error-body"></p>
     </div>

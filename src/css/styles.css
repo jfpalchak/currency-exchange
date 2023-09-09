@@ -68,4 +68,20 @@ label {
     display: none;
   }
 
+  .user-input {
+    width: 485px;
+  }
+
+  .button {
+    float: center;
+    width: 380px;
+  }
+
+
+  #results {
+    position: absolute;
+    bottom: 1;
+    margin-top: 200px;
+  }
+
 }

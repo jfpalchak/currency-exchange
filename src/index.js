@@ -9,36 +9,33 @@ import { getConversionRate, getSupportedCodes } from './js/exchange';
 
 // Create dropdown selection for all available currencies, 
 // both for Base Currency (default USD), and Target Currency (default EUR)
-function createSelectionForms() {
+export function createSelectionForms(currencies) {
   const selectBaseCurrency = document.querySelector('select#base-code');
   const selectTargetCurrency = document.querySelector('select#target-code');
-  selectBaseCurrency.append(createCurrencyOptions("USD"));
-  selectTargetCurrency.append(createCurrencyOptions("EUR"));
+  selectBaseCurrency.append(createOptions(currencies, "USD"));
+  selectTargetCurrency.append(createOptions(currencies, "EUR"));
 }
 
-// Create select form option elements for all available currencies found in session storage.
-// Takes a parameter that specifies which currency to set as the default option.
-// If session storage is empty:
-// call ExchangeService API to GET supported currency codes and add to session storage.
-function createCurrencyOptions(setDefault) {
-  if (!sessionStorage.length) {
-    getSupportedCodes();
-  }
+// For each supported currency, create a select form option element, and return those elements.
+// Takes two parameters: an array of currencies and their corresponding codes,
+// and a parameter that specifies which currency to set as the default select option.
+function createOptions(currencies, setDefault) {
 
   const optionGroup = document.createElement('optgroup');
   optionGroup.label = "Supported Currency";
 
-  Object.keys(sessionStorage).sort().forEach((code) => {
+  currencies.forEach((currency) => {
     let option = document.createElement('option');
-    option.value = code;
-    option.innerText = sessionStorage.getItem(code);
+    option.value = currency[0];
+    option.innerText = currency[1];
 
     // Set default select option
-    if (code === setDefault) {
+    if (option.value === setDefault) {
       option.selected = true;
     }
 
     optionGroup.append(option);
+    
   });
 
   return optionGroup;
@@ -77,8 +74,8 @@ export function displayError(error, base, query) {
 // Handle all UI Logic
 function handleEverything() {
 
-  createSelectionForms();
-  
+  getSupportedCodes();
+
   // Handle form submission
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();

@@ -27,23 +27,22 @@ export default class ExchangeService {
   }
 
   // static method to call ExchangeRate API's Supported Codes endpoint
-  static getSupportedCodes() { 
+  static async getSupportedCodes() { 
 
     const url = `https://v6.exchangerate-api.com/v6/${process.env.API_KEY}/codes`;
 
-    return fetch(url)
-      .then(function(response) {
-        if (!response.ok) {
-          return response.json()
-            .then(function(apiResponse) {
-              const errorMessage = `${response.status}: ${apiResponse["error-type"]}`;
-              throw new Error(errorMessage);
-            });
-        }
-        return response.json();
-      })
-      .catch(function(error) {
-        return error;
-      });
+    try{
+      const response = await fetch(url);
+      const jsonResponse = await response.json();
+
+      if (!response.ok) {
+        const errorMessage = `${response.status}: ${jsonResponse["error-type"]}`;
+        throw new Error(errorMessage);
+      }
+
+      return jsonResponse;
+    } catch(error) {
+      return error;
+    }
   }
 }

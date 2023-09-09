@@ -17,16 +17,15 @@ export function getConversionRate(baseAmount, baseCode, queryCode) {
 
 // call ExchangeService API Supported Codes endpoint, and add data to session storage
 // otherwise, display error for bad get
-export function getSupportedCodes() {
+export async function getSupportedCodes() {
   
-  ExchangeService.getSupportedCodes()
-    .then((currencies) => {
-      if (currencies.result === "success"){
-        addToSessionStorage(currencies["supported_codes"]);
-      } else {
-        displayError(currencies, "Supported Currencies");
-      }
-    });
+  const currencies = await ExchangeService.getSupportedCodes();
+
+  if (currencies.result === "success"){
+    addToSessionStorage(currencies["supported_codes"]);
+  } else {
+    displayError(currencies, "Supported Currencies");
+  }
 }
 
 // For each currency, add code and corresponding country name to session storage

@@ -3,19 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import { getConversionRate, getSupportedCodes } from './js/exchange';
 
-// UI LOGIC
+// TODO++ : Implement saving conversion rates to session storage.
+
+// UI LOGIC //
 
 // Create dropdown selection for all available currencies, 
-// both for Base Currency (default USD), and Target Currency (default USD)
+// both for Base Currency (default USD), and Target Currency (default EUR)
 function createSelectionForms() {
-  const selectBase = document.querySelector('select#base-code');
-  const selectTarget = document.querySelector('select#target-code');
-  selectBase.append(createCurrencyOptions("USD"));
-  selectTarget.append(createCurrencyOptions("EUR"));
+  const selectBaseCurrency = document.querySelector('select#base-code');
+  const selectTargetCurrency = document.querySelector('select#target-code');
+  selectBaseCurrency.append(createCurrencyOptions("USD"));
+  selectTargetCurrency.append(createCurrencyOptions("EUR"));
 }
 
 // Create select form option elements for all available currencies found in session storage.
-// Takes a parameter which specifies which currency to set as default option.
+// Takes a parameter that specifies which currency to set as the default option.
 // If session storage is empty:
 // call ExchangeService API to GET supported currency codes and add to session storage.
 function createCurrencyOptions(setDefault) {
@@ -42,7 +44,15 @@ function createCurrencyOptions(setDefault) {
   return optionGroup;
 }
 
-// display conversion data in DOM for user specified currency query
+// Clear displayed results
+function clearResults() {
+  document.querySelector("p#error-head").innerText = null;
+  document.querySelector("p#error-body").innerText = null;
+  document.querySelector("p#query-result").innerText = null;
+  document.querySelector('input#target-amount').value = null;
+}
+
+// Display conversion data in DOM for user specified currency query
 export function displayConversion(response) {
   document.getElementById('target-amount').value = response["conversion_result"];
 
@@ -56,7 +66,7 @@ export function displayConversion(response) {
 
 }
 
-// display error messages in DOM for user specified currency query
+// Display error messages in DOM for user specified currency query
 export function displayError(error, base, query) {
   const errorHead = `There was an issue getting the conversion rate for "${base}" to "${query}":`;
 
@@ -64,21 +74,12 @@ export function displayError(error, base, query) {
   document.querySelector("p#error-body").innerText = `${error}`;
 }
 
-// clear displayed results
-function clearResults() {
-  document.querySelector("p#error-head").innerText = null;
-  document.querySelector("p#error-body").innerText = null;
-  document.querySelector("p#query-result").innerText = null;
-  document.querySelector('input#target-amount').value = null;
-}
-
-// handle all UI Logic
+// Handle all UI Logic
 function handleEverything() {
 
-  // create dropdown selection for all available currencies
   createSelectionForms();
   
-  // handle form submission
+  // Handle form submission
   document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
 

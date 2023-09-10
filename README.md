@@ -54,13 +54,13 @@ API_KEY=[YOUR-API-KEY-HERE]
 > In the project's .gitignore, .env should already be present.
 
 
-11.  In your terminal, assuming Node.js and npm is installed, type the following command to install the project's dependencies found in `package.json`:
+13.  In your terminal, assuming Node.js and npm is installed, type the following command to install the project's dependencies found in `package.json`:
 
 ```bash
 $ npm install
 ```
 
-12. With the dependencies installed, type the following line in your terminal to build the application using webpack:
+14. With the dependencies installed, type the following line in your terminal to build the application using webpack:
 
 ```bash
 $ npm run build
@@ -72,7 +72,7 @@ $ npm run build
     2. Run tests on the backend JavaScript with Jest, you can do so by running the following command in the application's root directory: 
     > `$ npm run test`
 
-12. And finally, to run a live server of the project, type the following line in your terminal:
+15. And finally, to run a live server of the project, type the following line in your terminal:
 
 ```bash
 $ npm run start

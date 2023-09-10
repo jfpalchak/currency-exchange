@@ -1,5 +1,5 @@
 import ExchangeService from './../services/exchange-service.js';
-import { displayConversion, displayError} from './../index.js';
+import { displayConversion, displayError, createSelectionForms} from './../index.js';
 
 // call ExchangeService API Pair Conversion endpoint, display conversion data in DOM
 // otherwise, display error for bad get
@@ -22,18 +22,8 @@ export async function getSupportedCodes() {
   const currencies = await ExchangeService.getSupportedCodes();
 
   if (currencies.result === "success"){
-    addToSessionStorage(currencies["supported_codes"]);
+    createSelectionForms(currencies["supported_codes"]);
   } else {
     displayError(currencies, "Supported Currencies");
   }
-}
-
-// For each currency, add code and corresponding country name to session storage
-function addToSessionStorage(currencies) {
-
-  sessionStorage.clear(); // clear storage, just in case
-
-  currencies.forEach((currency) => {
-    sessionStorage.setItem(currency[0], currency[1]);
-  });
 }

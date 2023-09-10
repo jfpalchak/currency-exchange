@@ -3,8 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 import { getConversionRate, getSupportedCodes } from './js/exchange';
 
-// TODO++ : Implement saving conversion rates to session storage.
-
 // UI LOGIC //
 
 // Create dropdown selection for all available currencies, 
@@ -74,6 +72,7 @@ export function displayError(error, base, query) {
 // Handle all UI Logic
 function handleEverything() {
 
+  // Call ExchangeService API to create dropdown menus
   getSupportedCodes();
 
   // Handle form submission
@@ -90,6 +89,7 @@ function handleEverything() {
 
     clearResults();
 
+    // Call ExchangeService API to receive and display conversion data
     getConversionRate(baseAmount, baseCurrency, targetCurrency);
 
   });

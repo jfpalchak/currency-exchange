@@ -15,15 +15,16 @@ export function getConversionRate(baseAmount, baseCode, queryCode) {
     });
 }
 
-// call ExchangeService API Supported Codes endpoint, and add data to session storage
+// call ExchangeService API Supported Codes endpoint, and create selection forms with supported currencies
 // otherwise, display error for bad get
-export async function getSupportedCodes() {
+export function getSupportedCodes() {
   
-  const currencies = await ExchangeService.getSupportedCodes();
-
-  if (currencies.result === "success"){
-    createSelectionForms(currencies["supported_codes"]);
-  } else {
-    displayError(currencies, "Supported Currencies");
-  }
+  ExchangeService.getSupportedCodes()
+    .then((currencies) => {
+      if (currencies.result === "success"){
+        createSelectionForms(currencies["supported_codes"]);
+      } else {
+        displayError(currencies, "Supported Currencies");
+      }
+    });
 }

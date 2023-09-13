@@ -25,6 +25,7 @@ function createOptions(currencies, setDefault) {
   currencies.forEach((currency) => {
     let option = document.createElement('option');
     option.value = currency[0];
+    console.log(option.value);
     option.innerText = currency[1];
 
     // Set default select option
@@ -51,8 +52,8 @@ function clearResults() {
 export function displayConversion(response) {
   document.getElementById('target-amount').value = response["conversion_result"];
 
-  const base = sessionStorage.getItem(response["base_code"]);
-  const target = sessionStorage.getItem(response["target_code"]);
+  const base = response["base_code"];
+  const target = response["target_code"];
   const rate = response["conversion_rate"];
 
   const message = `1 ${base} equals: <h4>${rate} ${target}</h4>`;
@@ -65,6 +66,7 @@ export function displayConversion(response) {
 export function displayError(error, base, query) {
   const errorHead = `There was an issue getting the conversion rate for "${base}" to "${query}":`;
 
+  document.querySelector("p#query-result").innerHTML = null;
   document.querySelector("p#error-head").innerText = errorHead;
   document.querySelector("p#error-body").innerText = `${error}`;
 }

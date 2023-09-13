@@ -66,7 +66,9 @@ export function displayConversion(response) {
 export function displayError(error, base, query) {
   const errorHead = `There was an issue getting the conversion rate for "${base}" to "${query}":`;
 
+  // Clear user instructions to display error, if error on initial site visit
   document.querySelector("p#query-result").innerHTML = null;
+
   document.querySelector("p#error-head").innerText = errorHead;
   document.querySelector("p#error-body").innerText = `${error}`;
 }
